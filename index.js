@@ -170,7 +170,7 @@ app.post(
 );
 /////////////////////////////////// get all image data  or view //////////////////
 
-app.get("/getall", checkauth, async function (req, res) {
+app.get("/getall", async function (req, res) {
   let get_all_img = await Image.find({}, (err, img_data) => {
     let imag_map = {};
   });
