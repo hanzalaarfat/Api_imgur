@@ -143,30 +143,26 @@ app.get("/new", checkauth, (req, res) => {
 });
 //////////////////////////////////////// new post image data   addd ///////////////
 
-app.post(
-  "/newpost",
-  upload.single("insert_img")
-  async function (req, res) {
-    console.log(req.file);
+app.post("/newpost", upload.single("insert_img"), async function (req, res) {
+  console.log(req.file);
 
-    const { img_url, des, comment } = req.body;
+  const { img_url, des, comment } = req.body;
 
-    const imag = new Image({
-      img_url: req.file.originalname,
-      des,
-      comment,
+  const imag = new Image({
+    img_url: req.file.originalname,
+    des,
+    comment,
+  });
+
+  let imageResult = await imag
+    .save()
+    .then((doc) => {
+      return res.status(200).send(" image data sucessfull inserted");
+    })
+    .catch((err) => {
+      res.json(err);
     });
-
-    let imageResult = await imag
-      .save()
-      .then((doc) => {
-        return res.status(200).send(" image data sucessfull inserted");
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  }
-);
+});
 /////////////////////////////////// get all image data  or view //////////////////
 
 app.get("/getall", async function (req, res) {
