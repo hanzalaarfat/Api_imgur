@@ -145,8 +145,7 @@ app.get("/new", checkauth, (req, res) => {
 
 app.post(
   "/newpost",
-  upload.single("insert_img"),
-  checkauth,
+  upload.single("insert_img")
   async function (req, res) {
     console.log(req.file);
 
